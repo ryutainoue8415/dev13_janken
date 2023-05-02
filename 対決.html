@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>主人公と敵が対決して体力が０になったほうが負けです。</h1>
+<p>体力：主人公 <span id="playerHp"></span>, 敵 <span id="enemyHp"></span></p>
+<button onclick="attack()">攻撃</button>
+<button onclick="heal()">回復魔法</button>
+    
+
+
+<script>
+    // ゲームの説明
+    console.log("主人公と敵が対決して体力が０になったほうが負けです。");
+
+    // 対決のルール
+    const playerMaxHp = 15;
+    const playerAtk = 5;
+    let playerHp = playerMaxHp;
+    const enemyMaxHp = 25;
+    const enemyAtk = 4;
+    let enemyHp = enemyMaxHp;
+
+    // 攻撃処理
+    function attack(attacker, defender) {
+        console.log(`${attacker}の攻撃！`);
+        defenderHp -= attackerAtk;
+        console.log(`${defender}の残りの体力は${defenderHp}です。`);
+    }
+
+    // 回復処理
+    function heal() {
+        console.log("主人公は回復魔法を唱えた！");
+        if (Math.random() < 0.3) {
+            playerHp += 6;
+            console.log("主人公は6回復した！");
+        } else {
+            console.log("しかし、何も起こらなかった...");
+        }
+    }
+
+    // ゲーム開始
+    console.log("ゲームを開始します。");
+
+    while (playerHp > 0 && enemyHp > 0) {
+        // 主人公の攻撃
+        attack("主人公", "敵");
+        if (enemyHp <= 0) {
+            break;
+        }
+
+        // 敵の攻撃
+        attack("敵", "主人公");
+        if (playerHp <= 0) {
+            break;
+        }
+
+        // 主人公の回復
+        if (Math.random() < 0.3) {
+            heal();
+        }
+    }
+
+    // ゲーム終了
+    if (playerHp <= 0) {
+        console.log("主人公は敗北しました。");
+    } else {
+        console.log("敵を倒して主人公は勝利しました！");
+    }
+
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:left;
+    font-size: 32px;
+    width: 100%;
+    background-color: bisque;
+}
+header{
+    /* background-color: #f0dbad; */
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+
+    
+}
+main{
+    border-bottom:1px solid #ccc;
+}
+h1{
+ display: none;
+}
+
+.start {
+ position: relative;
+ width: 400px;
+ height: 100px;
+ font-size: 40px;
+ background-color: #ccc;
+ color: #1a0606;
+ border-radius: 7;
+ box-shadow: 4px 4Px 0px #666;
+}
+.start:active {
+transform: translateY(5px);
+}
+
+ .main{
+ text-align: center;
+ }
+ .primary{
+ text-align: center;
+ }
+.common{
+ text-align: center;
+}
+
+footer{
+    background-color: #fff;
+    border-bottom:1px solid #ccc;
+    text-align: center;
+}
+p{
+    font-size:150%;
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:50px;
+/* /* }
+ul{
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:100%;
+}
+li{
+    text-align: center;
+    list-style-type:none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display:table-cell;  /* 定義 */
+    cursor: pointer; 
+}
+li:hover{
+    background: #0066CC;
+    color:#fff;
+} 

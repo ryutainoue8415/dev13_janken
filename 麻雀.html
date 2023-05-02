@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/sample.css">
+  <title>麻雀ゲーム</title>
+</head>
+
+<body>
+  <header>
+    <h1>GAME START</h1>
+  </header>
+
+  <main>
+<button id="start" class="start">click here</button>
+<div class="main">
+    <div class="my_teyaku">自分の手役</div>
+    <div id="my_teyaku">自分の手役はここに表示</div>
+</div>
+<div class="primary">
+    <div class="opponent_tehai">相手の手役</div>
+    <div id="opponent_tehai">相手の手役はここに表示</div>
+
+</div>
+
+<div class="common">
+    <div class="result">結果を表示</div>
+    <div id="result" >結果は？</div>
+    <div class="game">GAMECOUNT</div>
+    <div id="game">GAMECOUNT</div>
+    <div class="win">WIN</div>
+    <div id="win">WIN</div>
+    <div class="lose">LOSE</div>
+    <div id="lose">LOSE</div>
+    <div class="draw">DRAW</div>
+    <div id="draw">DRAW</div>
+    <div class="avr">勝率</div>
+    <div id="avr">勝率</div>
+</div>
+  </main>
+
+  <footer></footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+
+  //h1タグのフェードイン、フェードアウト
+   $("h1").fadeIn(2000);
+   $("h1").fadeOut(2000);
+
+
+  //手役の変数を初期化
+   const nam = 0;
+   const nam1 = 0;
+
+
+  //勝負で"勝ち"をカウントするための初期化 
+  let winCount = 0;
+  //負けをカウントするための初期化
+  let loseCount = 0;
+  //引き分けをカウントするための初期化
+  let drawCount = 0;
+  //ボタンを押した回数をカウントの処理 
+  let clickCount = 0;
+  $("#start").on("click", function () {
+    clickCount++;
+  $("#game").text(clickCount);
+
+    //勝率の計算の処理
+    let avr = 0;
+    if (clickCount > 0) {
+      avr = winCount / clickCount * 100;
+    }
+    //勝率の表示
+    $("#avr").text(avr.toFixed(1) + "%");
+  });
+
+// ゲームスタートのボタンを押すと処理が開始される
+ $("#start").on("click",function(){
+
+// 自分の手役のランダム抽選
+  const min = 0 ;
+  const max = 101 ;
+  const nam =Math.floor(Math.random() * (max - min) + 1) + min;
+// 値に応じた手役
+   if     ( 1 <=nam && nam<= 3 ) {
+  $("#my_teyaku").text("緑一色"); //緑一色:3%
+   $("#my_teyaku").append('<img src="./JPEG/緑一色.png">'); 
+   }else if ( 4 <=nam && nam< 10 ) {
+  $("#my_teyaku").text(); //国士無双:7%
+     $("#my_teyaku").append('<img src="./JPEG/国士無双.png">'); 
+   }else if  (11 <= nam && nam < 20) {
+  $("#my_teyaku").text(); //平和清一色一通:10%
+     $("#my_teyaku").append('<img src="./JPEG/平和清一色一通.png">'); 
+   }else if  (21 <= nam && nam < 35) {
+  $("#my_teyaku").text("平和純全帯么九三色"); //平和純全帯么九三色:15%
+     $("#my_teyaku").append('<img src="./JPEG/平和純全帯么九三色.png">'); 
+   }else if (36 <= nam && nam < 55) {
+  $("#my_teyaku").text("三暗刻対々和"); //三暗刻対々和:20%
+    $("#my_teyaku").append('<img src="./JPEG/三暗刻対々和.png">'); 
+   }else if (56 <= nam && nam < 75) {
+  $("#my_teyaku").text("平和一通"); //平和一通:20%
+     $("#my_teyaku").append('<img src="./JPEG/平和一通.png">'); 
+   }else if (76 <= nam && nam < 100) {
+  $("#my_teyaku").text("平和"); //平和:20%
+    $("#my_teyaku").append('<img src="./JPEG/平和.png">'); //平和:20%
+   }else {
+   }
+   
+  // 相手の手役のランダム抽選
+  const nam1 = Math.floor(Math.random() * (max - min) + 1) + min;
+  // 値に応じた手役
+  if (1 <= nam1 && nam1 <= 3) {
+    $("#opponent_tehai").text("緑一色"); //緑一色:3%
+    $("#opponent_tehai").append('<img src="./JPEG/緑一色.png">'); 
+  } else if (4 <= nam1 && nam1 < 10) {
+    $("#opponent_tehai").text("国士無双"); //国士無双:7%
+    $("#opponent_tehai").append('<img src="./JPEG/国士無双.png">'); 
+  } else if (11 <= nam1 && nam1 < 20) {
+    $("#opponent_tehai").text("平和清一色一通"); //平和清一色一通:10%
+    $("#opponent_tehai").append('<img src="./JPEG/平和清一色一通.png">'); 
+  } else if (21 <= nam1 && nam1 < 35) {
+    $("#opponent_tehai").text("平和純全帯么九三色"); //平和純全帯么九三色:15%
+    $("#opponent_tehai").append('<img src="./JPEG/平和純全帯么九三色.png">'); 
+  } else if (36 <= nam1 && nam1 < 55) {
+    $("#opponent_tehai").text("三暗刻対々和"); //三暗刻対々和:20%
+    $("#opponent_tehai").append('<img src="./JPEG/三暗刻対々和.png">'); 
+  } else if (56 <= nam1 && nam1 < 75) {
+    $("#opponent_tehai").text("平和一通"); //平和一通:20%
+    $("#opponent_tehai").append('<img src="./JPEG/平和一通.png">'); 
+  } else if (76 <= nam1 && nam1 < 100) {
+    $("#opponent_tehai").text("平和"); //平和:20%
+    $("#opponent_tehai").append('<img src="./JPEG/平和.png">'); 
+  } else {
+  }
+
+  //自分の手役の変数宣言（テキスト型）
+  let my_teyaku = $("#my_teyaku").text();
+
+  //相手の手役の変数宣言（テキスト型）
+  let opponent_tehai = $("#opponent_tehai").text();
+  
+  // 手役の判定処理（テキスト型）
+  //   引き分けの場合の判定処理
+  if(my_teyaku === opponent_tehai){
+  $("#result").text("DRAW");
+  drawCount++;
+  //それ以外の場合の判定処理 (引き分けと勝ちを指定してそれ以外は負けにする)
+  } else if (my_teyaku === "緑一色" ){
+  $("#result").text("WIN");
+   winCount++;
+  } else if (my_teyaku === "国士無双" && opponent_tehai === "平和清一色一通") {
+  $("#result").text("WIN");
+  winCount++;
+  } else if (my_teyaku === "国士無双" && opponent_tehai === "平和純全帯么九三色") {
+  $("#result").text("WIN");
+  winCount++;
+  } else if (my_teyaku === "国士無双" && opponent_tehai === "三暗刻対々和") {
+  $("#result").text("WIN");
+  winCount++;
+  } else if (my_teyaku === "国士無双" && opponent_tehai === "平和一通") {
+  $("#result").text("WIN");
+  winCount++;
+  } else if (my_teyaku === "国士無双" && opponent_tehai === "平和") {
+    $("#result").text("WIN");
+    winCount++;
+  } else if (my_teyaku === "平和清一色一通" && opponent_tehai === "平和純全帯么九三色") {
+    $("#result").text("WIN");
+    winCount++;
+  } else if (my_teyaku === "平和清一色一通" && opponent_tehai === "三暗刻対々和") {
+    $("#result").text("WIN");
+    winCount++;
+  } else if (my_teyaku === "平和清一色一通" && opponent_tehai === "平和一通") {
+    $("#result").text("WIN");
+    winCount++;
+  } else if (my_teyaku === "平和清一色一通" && opponent_tehai === "平和") {
+    $("#result").text("WIN");
+    winCount++;
+  } else if (my_teyaku === "平和純全帯么九三色" && opponent_tehai === "三暗刻対々和") {
+    $("#result").text("WIN");
+    winCount++;
+  } else if (my_teyaku === "平和純全帯么九三色" && opponent_tehai === "平和一通") {
+    $("#result").text("WIN");
+    winCount++;
+  } else if (my_teyaku === "平和純全帯么九三色" && opponent_tehai === "平和") {
+    $("#result").text("WIN");
+    winCount++;
+  } else if (my_teyaku === "三暗刻対々和" && opponent_tehai === "平和一通") {
+    $("#result").text("WIN");
+    winCount++;
+  } else if (my_teyaku === "三暗刻対々和" && opponent_tehai === "平和") {
+    $("#result").text("WIN");
+    winCount++;
+  } else if (my_teyaku === "平和一通" && opponent_tehai === "平和") {
+    $("#result").text("WIN");
+    winCount++;
+  } else {
+    $("#result").text("LOSE");
+    loseCount++;
+    $("#win").text(winCount);
+    $("#lose").text(loseCount);
+    $("#draw").text(drawCount);
+ 
+  }
+});
+
+  </script>
+
+</body>
+
+</html>

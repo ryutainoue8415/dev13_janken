@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/sample.css">
+  <title>じゃんけん</title>
+</head>
+
+<body>
+  <header>
+    <h1>じゃんけん</h1>
+  </header>
+
+  <main>
+    <ul>
+      <li id="gu_btn">グー</li>
+      <li id="cho_btn">チョキ</li>
+      <li id="par_btn">パー</li>
+    </ul>
+    <div class="main">
+        <div class="com">
+              <div>コンピュータの出した手は？</div>
+              <div id="com_hand">コンピュータの出した手は？</div>
+        </div>
+        <div class="kekka">
+              <div>結果は？</div>
+              <div id="result">結果は？</div>
+        </div>
+        <div class="kaisu">
+              <div>勝った回数は？</div>
+              <div id="goukei">勝った回数は？</div>
+        </div>
+        <div class="avr">
+              <div>勝率</div>
+              <div id="syoritsu">勝率</div>
+        </div>
+      </div>
+  </main>
+
+  <footer>フッター</footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    //処理手順
+//大まかな流れ
+//自分の手を選択する→コンピューターの手が決まる→勝負を判定する
+//→勝負の回数をカウントする→勝った回数をカウントする→勝率を計算する
+
+//自分の手を選択して処理が開始される
+//変数で定義する"グー"=0 ; "チョキ"=1 ; "パー"=2 ;
+//COはMath.randomで何を出すか決める
+//自分がグーを出した時,  COの手が0="あいこ" 1="勝ち"   2="負け"   ;
+//自分がチョキを出した時,COの手が0="負け"   1="あいこ" 2="勝ち"   ;
+//自分がパーを出した時,  COの手が0="勝ち"   1="負け"   2="あいこ" ;
+//ボタンを押した回数をカウントする
+//勝ちの回数をカウントする
+//勝ちの回数を表示する.(id="goukei")
+//勝率を計算する
+//勝率を表示させる.(id="syoritsu")
+
+
+//h1タグをフェードアウトとフェードインする
+ 
+
+
+
+ //勝負で"勝ち"をカウントするための初期化 
+  let winCount = 0 ;
+  //ボタンを押した回数をカウントの処理 
+  let clickCount = 0;
+  $("#gu_btn,#cho_btn,#par_btn").on("click", function () {
+    clickCount++;
+    console.log(clickCount);
+  //勝率の計算の処理
+  let avr = 0;
+  if (clickCount > 0) {
+    avr = winCount / clickCount * 100 ;
+  }
+  $("#syoritsu").text(avr.toFixed(1) + "%");
+  });
+
+//自分が"グー"を出した時の処理
+$("#gu_btn").on("click",function(){
+ const min = 0;
+ const max = 3;
+ const nam = Math.floor(Math.random() * (max - min) + 0) + min; 
+  if (nam === 0) {         //comはグー
+    $("#com_hand").text("グー");
+    $("#result").text("あいこ");
+  }else if (nam === 1){    //comはチョキ
+    $("#com_hand").text("チョキ");
+    $("#result").text("WIN");
+    winCount++ ;
+  } else if (nam === 2) {   //comはパー
+    $("#com_hand").text("パー");
+    $("#result").text("負け");
+  }
+   $("#goukei").text(winCount);
+  });
+
+  //自分が"チョキ"を出した時の処理
+  $("#cho_btn").on("click", function () {
+    const min = 0;
+    const max = 3;
+    const nam = Math.floor(Math.random() * (max - min) + 0) + min;
+    if (nam === 0) {
+      $("#com_hand").text("グー");
+      $("#result").text("負け");
+    } else if (nam === 1) {
+      $("#com_hand").text("チョキ");
+      $("#result").text("あいこ");
+    } else if (nam === 2) {
+      $("#com_hand").text("パー");
+      $("#result").text("WIN");
+      winCount++ ;
+    }
+     $("#goukei").text(winCount);
+  });
+  
+  //自分が"パー"を出した時の処理
+  $("#par_btn").on("click", function () {
+    const min = 0;
+    const max = 3;
+    const nam = Math.floor(Math.random() * (max - min) + 0) + min;
+    if (nam === 0) {
+      $("#com_hand").text("グー");
+      $("#result").text("WIN");
+      winCount++ ;
+    } else if (nam === 1) {
+      $("#com_hand").text("チョキ");
+      $("#result").text("負け");
+    } else if (nam === 2) {
+      $("#com_hand").text("パー");
+      $("#result").text("あいこ");
+    }
+     $("#goukei").text(winCount);
+  });
+
+
+  </script>
+
+</body>
+
+</html>
