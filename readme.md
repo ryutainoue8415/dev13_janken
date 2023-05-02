@@ -3,7 +3,7 @@
 # プロダクトのタイトル
 - 麻雀ゲーム
 # URL
-
+https://ryutainoue8415.github.io/dev13_janken/
 
 ## プロダクトの紹介
 
